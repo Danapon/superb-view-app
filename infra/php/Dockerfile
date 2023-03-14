@@ -14,6 +14,12 @@ RUN apt-get update && \
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
+RUN echo 'alias la="ls -la"' >> ~/.bashrc
+RUN echo 'alias ll="ls -la"' >> ~/.bashrc
+RUN echo 'alias rm="rm -i"' >> ~/.bashrc
+RUN echo 'alias cp="cp -i"' >> ~/.bashrc
+RUN echo 'alias mv="mv -i"' >> ~/.bashrc
+
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /data
