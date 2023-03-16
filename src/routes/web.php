@@ -15,10 +15,10 @@ use App\Http\Controllers\SuperbViewController;
 */
 
 Route::get('/', function () {
-    return view('superb.index');
+    return view('welcome');
 });
 
-Route::get('/superb_views', [SuperbViewController::class, 'index'])->name('superb_view.index');
+// Route::get('/superb_views', [SuperbViewController::class, 'index'])->name('superb_view.index');
 
 Auth::routes();
 
