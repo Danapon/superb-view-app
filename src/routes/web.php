@@ -14,12 +14,14 @@ use App\Http\Controllers\SuperbViewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// Route::get('/superb_views', [SuperbViewController::class, 'index'])->name('superb_view.index');
+Route::get('/', [SuperbViewController::class, 'index']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('superb_views', SuperbViewController::class)->only(['index', 'create', 'store', 'show']);

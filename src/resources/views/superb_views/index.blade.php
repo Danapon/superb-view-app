@@ -9,7 +9,7 @@
 @section('content')
 
 <main>
-test
+
 </main>
 
 @endsection
