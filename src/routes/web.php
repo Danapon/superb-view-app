@@ -24,4 +24,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('superb_views', SuperbViewController::class)->only(['index', 'create', 'store', 'show']);
+Route::resource('superb_views', SuperbViewController::class)->only(['index', 'create', 'store', 'show'])->middleware('auth');
