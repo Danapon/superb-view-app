@@ -210,6 +210,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'PrefectureConst' => App\Consts\PrefectureConsts::class,//地方の定数クラス追加
     ])->toArray(),
 
 ];

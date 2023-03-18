@@ -30,9 +30,10 @@
 <body>
     <div id="app">
         @include('conponents.header')
-        <main class="py-4">
+        <!-- <main class="py-4"> -->
+        <main class="container">
             <!-- 見出し -->
-            <h2 class="section_title">@yield('section_title')</h2>
+            {{-- <h2 class="section_title">@yield('section_title')</h2> --}}
             @yield('content')
         </main>
         @include('conponents.footer')

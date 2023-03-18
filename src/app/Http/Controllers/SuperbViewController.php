@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\SuperbViewReview;
 use App\Models\SuperbViewMaster;
+use App\Models\PrefectureMaster;
 
 class SuperbViewController extends Controller
 {
@@ -17,7 +18,10 @@ class SuperbViewController extends Controller
      */
     public function index()
     {
-        return view('superb_views.index');
+
+        $prefectures = PrefectureMaster::get();
+
+        return view('superb_views.index' ,compact('prefectures'));
     }
 
     /**
