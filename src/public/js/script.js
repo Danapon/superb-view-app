@@ -19,8 +19,8 @@ map.on('load', function() {
       // ピンの生成
       const marker = new mapboxgl.Marker({
       })
-      // 緯度経度を取得
-      .setLngLat([139.810810, 35.710006])
+      // 経度緯度を取得
+      .setLngLat([139.810810, 35.710006]) //経度,緯度
       // ポップアップ表示
       .setPopup(popup) // sets a popup on this marker
       // map上に追加

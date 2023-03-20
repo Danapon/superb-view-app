@@ -1,11 +1,23 @@
+/***** 共通 *****/
 #app {
   height: 55.03px;
 }
-
+/* メッセージ */
+.validation {
+  color: #d71c1c;
+}
+.error_message {
+  color: #d71c1c;
+}
+.post_message {
+  color: #0fbe9f;
+  margin-top: 0.5rem;
+}
+/***** トップページ *****/
 /* mapセクション */
 main {
   position: relative;
-  height: 600px;
+  height: 82vh;
 }
 #map {
   position: absolute;
@@ -14,7 +26,7 @@ main {
   width: 75%;
 }
 .footer {
-  max-height: 60px;
+  max-height: 85px;
 }
 
 /* 都道府県から探すセクション */
@@ -31,4 +43,12 @@ main {
 .prefecture {
   font-size: 0.7rem;
   margin-right: 0.3rem;
+}
+
+/***** 投稿画面 *****/
+.review-score-color {
+  color: #0fbe9f;
+}
+.review-score-color:focus {
+  color: #0fbe9f;
 }

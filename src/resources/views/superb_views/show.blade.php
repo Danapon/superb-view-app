@@ -8,8 +8,11 @@
 
 @section('content')
 
+<!-- 投稿完了メッセージ -->
+@if(session('post_message'))
+  <p class="post_message">{{ session('post_message') }}</p>
+@endif
 
-
-
+<p>{{ $superb_view_reviews->id }}</p>
 
 @endsection

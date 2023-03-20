@@ -12,4 +12,9 @@ class PrefectureMaster extends Model
     public function superbViewMasters() {
         return $this->hasMany(SuperbViewMaster::class);
     }
+
+    // 都道府県名に一致するレコードを取得
+    public function getPrefectureMaster(string $prefecture_name) {
+        return self::where('name', $prefecture_name)->get();
+    }
 }
