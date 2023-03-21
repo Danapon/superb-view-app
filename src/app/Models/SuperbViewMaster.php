@@ -22,7 +22,7 @@ class SuperbViewMaster extends Model
         $get_name = self::where('name', $response_name)->first();
         return empty($get_name) ? false : true;
     }
-    
+
     // レスポンスデータをテーブルに登録
     public function createSuperbViewMaster(
         bool $check_name_exist,
@@ -43,6 +43,12 @@ class SuperbViewMaster extends Model
             $this->save();
             return self::where('name', $response_name)->get();
         }
+    }
+
+    /* リレーション取得 */
+    public function getRelation($superb_view_master_id) {
+        // superb_view_mastersテーブルからリレーション設定されたテーブルを全て取得
+        return $this->where('id', $superb_view_master_id)->with('superbViewReviews.user')->get();
     }
 
 }

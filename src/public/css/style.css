@@ -52,3 +52,49 @@ main {
 .review-score-color:focus {
   color: #0fbe9f;
 }
+
+/***** 詳細画面 *****/
+.row_style {
+  margin-top: 1rem;
+}
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  font-size: 25px;
+  height: 25px;
+  width: 100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+.star-ratings-css-top {
+  color: #e7711b;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-ratings-css-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+.post_block_parent {
+  border: 1px solid #e4dede;
+  border-radius: 5px;
+  box-shadow: 0px 8px 5px -9px rgba(0,0,0,0.5);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.post_block_child {
+  text-align: center;
+}
+.post_image {
+  max-width: 100%;
+  height: auto;
+}

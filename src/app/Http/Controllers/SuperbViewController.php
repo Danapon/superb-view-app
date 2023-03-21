@@ -121,7 +121,7 @@ class SuperbViewController extends Controller
                 // 取得したファイル名で保存
                 $request->file('image_url')->storeAs('public/' . $dir, $file_name);
                 // 画像のパスを取得
-                $image_url = 'public/' . $dir . '/' . $file_name;
+                $image_url = 'storage/' . $dir . '/' . $file_name;
             }
             // superb_view_reviewsテーブルに入力データを登録する
             $superb_view_master_id = $superb_view_masters[0]->id;
@@ -152,8 +152,8 @@ class SuperbViewController extends Controller
      */
     public function show($id)
     {
-        $superb_view_reviews = SuperbViewReview::where('superb_view_master_id', $id)->orderByDesc('id')->get();
-        return view('superb_views.show' ,compact('superb_view_reviews'));
+        $superb_view_masters = $this->superb_view_masters->getRelation($id);
+        return view('superb_views.show' ,compact('superb_view_masters'));
     }
 
     // 以下はMVP範囲外なので時間があれば作成する
