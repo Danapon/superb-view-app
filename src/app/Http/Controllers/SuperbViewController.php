@@ -29,6 +29,7 @@ class SuperbViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index($prefecture_id)
     public function index()
     {
         // 都道府県マスターテーブルの全レコード取得

@@ -4,7 +4,9 @@ const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [139.767125, 35.681236],//中心は東京駅を指定
-      zoom: 11.15
+      // center: [127.6811	,	26.2125],//中心は東京駅を指定
+      zoom: 4.9 //デフォルト表示
+      // zoom: 7.5   
 });
 // mapをloadした後に実行
 map.on('load', function() {
