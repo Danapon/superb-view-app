@@ -30,7 +30,7 @@ class SuperbViewController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function index($prefecture_id)
-    public function index()
+    public function index(Request $request)
     {
         // 都道府県マスターテーブルの全レコード取得
         $prefectures = PrefectureMaster::get();
@@ -135,9 +135,7 @@ class SuperbViewController extends Controller
 
             $post_message = "投稿しました";
 
-            // return to_route('superb_views.show')->with(compact('post_message'));
             return to_route('superb_views.show', ['superb_view' => $superb_view_master_id])->with(compact('post_message'));
-            // return view('superb_views.show',compact('superb_view_master'));
 
         }else{
             throw new \Exception('ERROR response:'.$response->getStatusCode());

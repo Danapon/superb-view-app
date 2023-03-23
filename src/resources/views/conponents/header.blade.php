@@ -55,6 +55,16 @@
                           </div>
                       </li>
                   @endguest
+
+                      <li class="ms-3">
+                        <form method="GET" action="{{ route('superb_views.index') }}" style="display:inline-flex">
+                          <div class="form-group">
+                            <input class="form-control" type="search" placeholder="キーワードを入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                          </div>
+                            <button class="btn btn-outline-success ms-1" type="submit" id="button-addon2"><i class="fas fa-search"></i> 検索</button>
+                        </form>
+                      </li>
+
               </ul>
           </div>
       </div>

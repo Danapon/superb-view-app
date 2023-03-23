@@ -18,6 +18,9 @@ map.on('load', function() {
       const popup = new mapboxgl.Popup({ offset: 25 }).setText(
       'スカイツリーです'
       );
+      const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
+            '札幌駅です'
+            );
       // ピンの生成
       const marker = new mapboxgl.Marker({
       })
@@ -25,6 +28,16 @@ map.on('load', function() {
       .setLngLat([139.810810, 35.710006]) //経度,緯度
       // ポップアップ表示
       .setPopup(popup) // sets a popup on this marker
+      // map上に追加
+      .addTo(map);
+      // map.resize();
+      // ピンの生成2
+      const marker2 = new mapboxgl.Marker({
+      })
+      // 経度緯度を取得
+      .setLngLat([141.3428, 43.0687]) //経度,緯度
+      // ポップアップ表示
+      .setPopup(popup2) // sets a popup on this marker
       // map上に追加
       .addTo(map);
       // map.resize();
