@@ -1,6 +1,6 @@
 // mapboxで地図を表示
 const prefData = {
-      "1":{"lng": 141.3428,"lat":43.0687,"zoom":4.9},
+      "1":{"lng": 141.3428,"lat":43.0687,"zoom":5.5},
       "2":{"lng": 140.71,"lat":40.8222,"zoom":7.3},
       "3":{"lng": 141.1522,"lat":39.7019,"zoom":7.1},
       "4":{"lng": 140.8719,"lat":38.2688,"zoom":7.1},
@@ -48,7 +48,7 @@ const prefData = {
       "46":{"lng": 130.5581,"lat":31.5603,"zoom":8.3},
       "47":{"lng": 127.6811,"lat":26.2125,"zoom":7.5},
 }
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXBvbGlhMzA2IiwiYSI6ImNsZmFmam80MjB2Zjkzem13NGJjMTFoNWoifQ.vzZfpoQYaY1cfOHW-y7exw';
+mapboxgl.accessToken = mapbox_key;
 const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -106,7 +106,7 @@ $(function() {
             // These options control the flight curve, making it move
             // slowly and zoom out almost completely before starting
             // to pan.
-            speed: 0.8, // make the flying slow
+            speed: 1.2, // make the flying slow
             curve: 1, // change the speed at which it zooms out
              
             // This can be any easing function: it takes a number between

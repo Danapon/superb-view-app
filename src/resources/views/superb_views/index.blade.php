@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @push('scripts')
+      <script>
+        const mapbox_key = @json(config('key.mapbox-value'));
+      </script>
       <script src="{{ asset('/js/script.js') }}"></script>
 @endpush
 
