@@ -2,7 +2,8 @@
 
 @push('scripts')
       <script>
-        const mapbox_key = @json(config('key.mapbox-value'));
+        const mapboxKey = @json(config('key.mapbox-value'));
+        const superbViewMasters = @json($superb_view_masters);
       </script>
       <script src="{{ asset('/js/script.js') }}"></script>
 @endpush

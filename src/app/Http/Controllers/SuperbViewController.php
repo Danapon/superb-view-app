@@ -34,8 +34,10 @@ class SuperbViewController extends Controller
     {
         // 都道府県マスターテーブルの全レコード取得
         $prefectures = PrefectureMaster::get();
+        // 絶景マスタテーブルの全レコード取得
+        $superb_view_masters = SuperbViewMaster::get();
 
-        return view('superb_views.index' ,compact('prefectures'));
+        return view('superb_views.index' ,compact('prefectures', 'superb_view_masters'));
     }
 
     /**

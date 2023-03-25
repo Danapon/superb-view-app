@@ -48,14 +48,12 @@ const prefData = {
       "46":{"lng": 130.5581,"lat":31.5603,"zoom":8.3},
       "47":{"lng": 127.6811,"lat":26.2125,"zoom":7.5},
 }
-mapboxgl.accessToken = mapbox_key;
+mapboxgl.accessToken = mapboxKey;
 const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [139.767125,35.681236],//中心は東京駅を指定
-      // center: [127.6811	,	26.2125],//中心は東京駅を指定
-      zoom: 4.9 //デフォルト表示
-      // zoom: 7.5   
+      zoom: 4.9 //デフォルト表示 
 });
 // mapをloadした後に実行
 map.on('load', function() {
@@ -63,33 +61,45 @@ map.on('load', function() {
       //       'get',
       //       `name_jp`
       // ]);
-      // ピンのポップアップ作成
-      const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      'スカイツリーです'
-      );
-      const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
-            '札幌駅です'
-            );
-      // ピンの生成
-      const marker = new mapboxgl.Marker({
-      })
-      // 経度緯度を取得
-      .setLngLat([139.810810, 35.710006]) //経度,緯度
-      // ポップアップ表示
-      .setPopup(popup) // sets a popup on this marker
-      // map上に追加
-      .addTo(map);
-      // map.resize();
-      // ピンの生成2
-      const marker2 = new mapboxgl.Marker({
-      })
-      // 経度緯度を取得
-      .setLngLat([141.3428, 43.0687]) //経度,緯度
-      // ポップアップ表示
-      .setPopup(popup2) // sets a popup on this marker
-      // map上に追加
-      .addTo(map);
-      // map.resize();
+
+      // ループ処理入れる
+      superbViewMasters.forEach(function(superbViewMaster){
+
+            // ピンのポップアップ作成
+            eval("var popup" + superbViewMaster.id + " = new mapboxgl.Popup({ offset: 25 }).setHTML(" + "`<h3>" + superbViewMaster.name + "</h3><br><p>所在地：" + superbViewMaster.address + "</p><br><a href=" + "\"superb_views/" + superbViewMaster.id + "\"" + ">口コミを見る" + "</a>`" + ");");
+            
+            // ピンの生成
+            eval("var marker" + superbViewMaster.id + " = new mapboxgl.Marker({}).setLngLat([" + superbViewMaster.lng + "," + superbViewMaster.lat + "]).setPopup(popup" + superbViewMaster.id + ").addTo(map);" );
+
+      });
+
+      // // ピンのポップアップ作成
+      // const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+      // 'スカイツリーです'
+      // );
+      // const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
+      //       '札幌駅です'
+      //       );
+      // // ピンの生成
+      // const marker = new mapboxgl.Marker({
+      // })
+      // // 経度緯度を取得
+      // .setLngLat([139.810810, 35.710006]) //経度,緯度
+      // // ポップアップ表示
+      // .setPopup(popup) // sets a popup on this marker
+      // // map上に追加
+      // .addTo(map);
+      // // map.resize();
+      // // ピンの生成2
+      // const marker2 = new mapboxgl.Marker({
+      // })
+      // // 経度緯度を取得
+      // .setLngLat([141.3428, 43.0687]) //経度,緯度
+      // // ポップアップ表示
+      // .setPopup(popup2) // sets a popup on this marker
+      // // map上に追加
+      // .addTo(map);
+      // // map.resize();
 })
 $(function() {
       // ボタンがクリックされた場合
