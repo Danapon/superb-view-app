@@ -14,37 +14,37 @@
             <div class="col region_block">
                   <p class="region">北海道・東北地方</p>
                   @for ($i = 0; $i < PrefectureConst::HOKKAIDO_TOHOKU; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
             <div class="col region_block">
                   <p class="region">関東地方</p>
                   @for ($i = PrefectureConst::HOKKAIDO_TOHOKU; $i < PrefectureConst::KANTO; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
             <div class="col region_block">
                   <p class="region">中部地方</p>
                   @for ($i = PrefectureConst::KANTO; $i < PrefectureConst::CHUBU; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
             <div class="col region_block">
                   <p class="region">関西地方</p>
                   @for ($i = PrefectureConst::CHUBU; $i < PrefectureConst::KANSAI; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
             <div class="col region_block">
                   <p class="region">中国・四国地方</p>
                   @for ($i = PrefectureConst::KANSAI; $i < PrefectureConst::CHUGOKU_SIKOKU; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
             <div class="col region_block">
                   <p class="region">九州・沖縄地方</p>
                   @for ($i = PrefectureConst::CHUGOKU_SIKOKU; $i < PrefectureConst::KYUSYU_OKINAWA; $i++)
-                  <a href="#" class="prefecture">{{ $prefectures[$i]->name }}</a>
+                  <a href="#" class="prefecture" data-pref-code="{{ $prefectures[$i]->id }}">{{ $prefectures[$i]->name }}</a>
                   @endfor
             </div>
       </div>
