@@ -1,4 +1,5 @@
-// mapboxで地図を表示
+/* mapboxで地図を表示 */
+// 各都道府県の緯度経度とzoom値
 const prefData = {
       "1":{"lng": 141.3428,"lat":43.0687,"zoom":5.5},
       "2":{"lng": 140.71,"lat":40.8222,"zoom":7.3},
@@ -48,13 +49,31 @@ const prefData = {
       "46":{"lng": 130.5581,"lat":31.5603,"zoom":8.3},
       "47":{"lng": 127.6811,"lat":26.2125,"zoom":7.5},
 }
+// デフォルト値
+const defaultLng = 139.767125;
+const defaultLat = 35.681236;
+const defaultZoom = 4.9;
+// 検索時のzoom値
+const searchZoom = 14.5;
+// mapboxAPIkey取得
 mapboxgl.accessToken = mapboxKey;
-const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [139.767125,35.681236],//中心は東京駅を指定
-      zoom: 4.9 //デフォルト表示 
-});
+// map生成
+if (typeof searchResultLng !== 'undefined') {
+      var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [searchResultLng, searchResultLat],//中心は東京駅を指定
+            zoom: searchZoom //デフォルト表示 
+      });
+}
+else {
+      var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [defaultLng, defaultLat],//中心は東京駅を指定
+            zoom: defaultZoom //デフォルト表示 
+      });
+}
 // mapをloadした後に実行
 map.on('load', function() {
       // map.setLayoutProperty('country-label', 'text-field', [
@@ -67,7 +86,7 @@ map.on('load', function() {
 
             // ピンのポップアップ作成
             eval("var popup" + superbViewMaster.id + " = new mapboxgl.Popup({ offset: 25 }).setHTML(" + "`<h3>" + superbViewMaster.name + "</h3><br><p>所在地：" + superbViewMaster.address + "</p><br><a href=" + "\"superb_views/" + superbViewMaster.id + "\"" + ">口コミを見る" + "</a>`" + ");");
-            
+
             // ピンの生成
             eval("var marker" + superbViewMaster.id + " = new mapboxgl.Marker({}).setLngLat([" + superbViewMaster.lng + "," + superbViewMaster.lat + "]).setPopup(popup" + superbViewMaster.id + ").addTo(map);" );
 
@@ -77,9 +96,6 @@ map.on('load', function() {
       // const popup = new mapboxgl.Popup({ offset: 25 }).setText(
       // 'スカイツリーです'
       // );
-      // const popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
-      //       '札幌駅です'
-      //       );
       // // ピンの生成
       // const marker = new mapboxgl.Marker({
       // })
@@ -87,16 +103,6 @@ map.on('load', function() {
       // .setLngLat([139.810810, 35.710006]) //経度,緯度
       // // ポップアップ表示
       // .setPopup(popup) // sets a popup on this marker
-      // // map上に追加
-      // .addTo(map);
-      // // map.resize();
-      // // ピンの生成2
-      // const marker2 = new mapboxgl.Marker({
-      // })
-      // // 経度緯度を取得
-      // .setLngLat([141.3428, 43.0687]) //経度,緯度
-      // // ポップアップ表示
-      // .setPopup(popup2) // sets a popup on this marker
       // // map上に追加
       // .addTo(map);
       // // map.resize();

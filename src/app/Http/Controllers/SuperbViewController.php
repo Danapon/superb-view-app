@@ -36,8 +36,10 @@ class SuperbViewController extends Controller
         $prefectures = PrefectureMaster::get();
         // 絶景マスタテーブルの全レコード取得
         $superb_view_masters = SuperbViewMaster::get();
+        // 検索結果取得(id)
+        $request->has('search') ? $search_id = $this->superb_view_masters->searchSuperbViewMaster($request->search) : $search_id = "";
 
-        return view('superb_views.index' ,compact('prefectures', 'superb_view_masters'));
+        return view('superb_views.index' ,compact('prefectures', 'superb_view_masters', 'search_id'));
     }
 
     /**

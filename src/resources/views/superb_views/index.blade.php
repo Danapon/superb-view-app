@@ -4,6 +4,10 @@
       <script>
         const mapboxKey = @json(config('key.mapbox-value'));
         const superbViewMasters = @json($superb_view_masters);
+        @if ($search_id)
+            const searchResultLng = @json($superb_view_masters->where('id', $search_id)->first()->lng);
+            const searchResultLat = @json($superb_view_masters->where('id', $search_id)->first()->lat);
+        @endif
       </script>
       <script src="{{ asset('/js/script.js') }}"></script>
 @endpush

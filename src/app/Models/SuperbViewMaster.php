@@ -17,13 +17,13 @@ class SuperbViewMaster extends Model
         return $this->belongsTo(PrefectureMaster::class);
     }
 
-    // テーブルに既に地名のレコードが存在するか確認する
+    /* テーブルに既に地名のレコードが存在するか確認する */
     public function checkSuperbViewMaster(string $response_name) {
         $get_name = self::where('name', $response_name)->first();
         return empty($get_name) ? false : true;
     }
 
-    // レスポンスデータをテーブルに登録
+    /* レスポンスデータをテーブルに登録 */
     public function createSuperbViewMaster(
         bool $check_name_exist,
         int $prefecture_id,
@@ -50,5 +50,11 @@ class SuperbViewMaster extends Model
         // superb_view_mastersテーブルからリレーション設定されたテーブルを全て取得
         return $this->where('id', $superb_view_master_id)->with('superbViewReviews.user')->get();
     }
+
+     /* 検索結果取得(id) */
+     public function searchSuperbViewMaster(string $search_word) {
+        $get_result = self::where('name', "LIKE", "%$search_word%")->first();//部分一致で検索
+        return empty($get_result) ? '' : $get_result->id;
+    }    
 
 }
