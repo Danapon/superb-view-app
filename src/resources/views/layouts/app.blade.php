@@ -30,6 +30,8 @@
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet" />
     <!-- 個別css -->
     @stack('styles')
+    <!-- favicon -->
+    <link rel="icon" href="{{ asset('/favicon.png') }}">
 
 </head>
 <body>
