@@ -80,7 +80,6 @@ if (map) {
             defaultLanguage: "ja",
       });
       map.addControl(language);
-      // language._initialStyleUpdate();
 }
 // mapをloadした後に実行
 map.on('load', function() {
