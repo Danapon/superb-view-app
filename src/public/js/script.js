@@ -74,6 +74,14 @@ else {
             zoom: defaultZoom //デフォルト表示 
       });
 }
+if (map) {
+      // 言語設定
+      const language = new MapboxLanguage({
+            defaultLanguage: "ja",
+      });
+      map.addControl(language);
+      // language._initialStyleUpdate();
+}
 // mapをloadした後に実行
 map.on('load', function() {
       // map.setLayoutProperty('country-label', 'text-field', [
