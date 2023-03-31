@@ -40,7 +40,9 @@
                   </div>
             </div>
             <div class="col post_block_child">
-                  <img src="{{ asset($superbViewReview->image_url) }}" class="post_image">
+                  @if($superbViewReview->image_url)
+                        <img src="{{ asset($superbViewReview->image_url) }}" class="post_image">
+                  @endif
             </div>
       </div> 
       @endforeach
