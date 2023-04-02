@@ -13,6 +13,10 @@
   color: #0fbe9f;
   margin-top: 0.5rem;
 }
+.delete_message {
+  color: #f59208;
+  margin-top: 0.5rem;
+}
 /***** トップページ *****/
 /* mapセクション */
 main {

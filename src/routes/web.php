@@ -14,21 +14,16 @@ use App\Http\Controllers\SuperbViewController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [SuperbViewController::class, 'index']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('superb_views', SuperbViewController::class)->only(['index', 'create', 'store', 'show'])->middleware('auth');
-
-// Route::controller(SuperbViewController::class)->group(function () {
-//     Route::get('/superb_views/prefecture/{prefecture_id}', 'index')->name('superb_views.index');
-//     Route::get('/superb_views/create', 'create')->name('superb_views.create');
-//     Route::post('/superb_views', 'store')->name('superb_views.store');
-//     Route::get('/superb_views/{superb_view}', 'show')->name('superb_views.show');
-// })->middleware('auth');
+Route::controller(SuperbViewController::class)->group(function () {
+    Route::get('superb_views', 'index')->name('superb_views.index');
+    Route::get('superb_views/create', 'create')->name('superb_views.create');
+    Route::post('superb_views', 'store')->name('superb_views.store');
+    Route::get('superb_views/{superb_view}', 'show')->name('superb_views.show');
+    Route::delete('superb_views/{superb_view}/{id}', 'destroy')->name('superb_views.destroy');
+})->middleware('auth');

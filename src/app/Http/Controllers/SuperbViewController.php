@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\SuperbViewReview;
 use App\Models\SuperbViewMaster;
@@ -120,39 +121,21 @@ class SuperbViewController extends Controller
         return view('superb_views.show' ,compact('superb_view_masters'));
     }
 
-    // 以下はMVP範囲外なので時間があれば作成する
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, $superb_view_master_id)
+    {
+        // S3から画像ファイルを削除
+        Storage::disk('s3')->delete(substr(SuperbViewReview::where('id', '=', $id)->value('image_url'), 70));
+        // 該当の投稿を削除
+        SuperbViewReview::where('id', '=', $id)->delete();
+        // delete_messageを設定
+        $delete_message = "投稿を削除しました";
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+        return to_route('superb_views.show', ['superb_view' => $superb_view_master_id])->with(compact('delete_message'));
+    }
 }

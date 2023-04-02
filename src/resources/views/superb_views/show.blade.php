@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+      <script src="{{ asset('/js/script.js') }}"></script>
+@endpush
+
 @section('title', '絶景詳細')
 
 @section('content')
@@ -7,6 +11,10 @@
 <!-- 投稿完了メッセージ -->
 @if(session('post_message'))
   <p class="post_message">{{ session('post_message') }}</p>
+@endif
+<!-- 削除完了メッセージ -->
+@if(session('delete_message'))
+  <p class="delete_message">{{ session('delete_message') }}</p>
 @endif
 
 <div class="container">
@@ -44,7 +52,14 @@
                         <img src="{{ $superbViewReview->image_url }}" class="post_image">
                   @endif
             </div>
-      </div> 
+            @if(Auth::user()->id === $superbViewReview->user_id)
+                  <form action="{{ route('superb_views.destroy', [$superbViewReview->id, $superb_view_masters[0]->id] ) }}" method="post" style="text-align: center; margin-top: 1rem;">
+                  @csrf
+                  @method('delete')
+                  <input type="submit" name="delete" class="common_btn" value="口コミを削除" onClick="delete_alert(event);return false;">
+            @endif
+      </form>
+      </div>
       @endforeach
       <div style="margin-top: 5rem;">&emsp;</div>
 </div>

@@ -1,3 +1,4 @@
+/***** トップページ *****/
 /* mapboxで地図を表示 */
 // 各都道府県の緯度経度とzoom値
 const prefData = {
@@ -141,3 +142,13 @@ $(function() {
             });
       });
 });
+
+/***** 詳細ページ *****/
+// 投稿削除確認アラート
+function delete_alert(e){
+      if(!window.confirm('本当に削除しますか？')){
+         window.alert('キャンセルされました'); 
+         return false;
+      }
+      document.deleteform.submit();
+    };
