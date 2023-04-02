@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class UploadService
 {
 
@@ -11,14 +13,12 @@ class UploadService
     // アップロードされた画像ファイルがあれば保存する
     $image_url = "";
     if ($request->file('image_url')) {
-        // ディレクトリ名
-        $dir = 'review_images';
         // アップロードされたファイル名を取得
-        $file_name = $request->file('image_url')->getClientOriginalName();
-        // 取得したファイル名で保存
-        $request->file('image_url')->storeAs('public/' . $dir, $file_name);
-        // 画像のパスを取得
-        $image_url = 'storage/' . $dir . '/' . $file_name;
+        $file_name = $request->file('image_url');
+        // S3バケットにアップロード
+        $path = Storage::disk('s3')->putFile('/review_images', $file_name, 'public');
+        // アップロードした画像のパスを取得
+        $image_url = Storage::disk('s3')->url($path);
     }
 
     return $image_url;

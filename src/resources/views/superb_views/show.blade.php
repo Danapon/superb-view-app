@@ -41,7 +41,7 @@
             </div>
             <div class="col post_block_child">
                   @if($superbViewReview->image_url)
-                        <img src="{{ asset($superbViewReview->image_url) }}" class="post_image">
+                        <img src="{{ $superbViewReview->image_url }}" class="post_image">
                   @endif
             </div>
       </div> 
