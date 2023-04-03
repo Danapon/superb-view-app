@@ -1,6 +1,6 @@
 # superb-view-app
 日本全国の絶景を投稿・検索できるアプリ  
-https://superb-view-app.herokuapp.com  
+https://www.superb-view.xyz/  
 
 <img width="1237" alt="superb-view-app" src="https://user-images.githubusercontent.com/117153333/229414876-7943fae0-4382-48a3-89b5-c10565a7ccb2.png">
 
