@@ -27,3 +27,5 @@ Route::controller(SuperbViewController::class)->group(function () {
     Route::get('superb_views/{superb_view}', 'show')->name('superb_views.show');
     Route::delete('superb_views/{superb_view}/{id}', 'destroy')->name('superb_views.destroy');
 })->middleware('auth');
+
+Route::delete('/users/{user}', [App\Http\Controllers\UsersController::class, 'destroy'])->name('users.destroy');

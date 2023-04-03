@@ -41,18 +41,32 @@
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                               {{ Auth::user()->name }}
                           </a>
+                        
+                          <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{ route('logout') }}"
-                                  onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                  {{ __('Logout') }}
-                              </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('users.destroy', Auth::user()) }}"
+                                    onclick="delete_alert(event); return false;">
+                                    {{ __('Quit') }}
+                                </a>
 
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                  @csrf
-                              </form>
-                          </div>
+                                <form action="{{ route('users.destroy', Auth::user()) }}" method="POST" class="d-none" name="deleteform">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                            </li>
+                          </ul>
                       </li>
                   @endguest
 
