@@ -17,10 +17,11 @@
               <!-- Right Side Of Navbar -->
               <ul class="navbar-nav ms-auto">
                   <!-- Authentication Links -->
-
+                  @auth  
                   <li class="nav-item">
                       <a class="nav-link" href="{{ route('superb_views.create') }}" style="font-weight: bold;">絶景を投稿</a>
                   </li>
+                  @endauth
 
                   @guest
                       @if (Route::has('login'))

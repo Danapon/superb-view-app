@@ -52,12 +52,14 @@
                         <img src="{{ $superbViewReview->image_url }}" class="post_image">
                   @endif
             </div>
+            @auth
             @if(Auth::user()->id === $superbViewReview->user_id)
                   <form action="{{ route('superb_views.destroy', [$superbViewReview->id, $superb_view_masters[0]->id] ) }}" method="post" style="text-align: center; margin-top: 1rem;">
                   @csrf
                   @method('delete')
                   <input type="submit" name="delete" class="common_btn" value="口コミを削除" onClick="delete_alert(event);return false;">
             @endif
+            @endauth
       </form>
       </div>
       @endforeach
