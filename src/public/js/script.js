@@ -50,14 +50,17 @@ const prefData = {
       "46":{"lng": 130.5581,"lat":31.5603,"zoom":8.3},
       "47":{"lng": 127.6811,"lat":26.2125,"zoom":7.5},
 }
+
 // デフォルト値
 const defaultLng = 139.767125;
 const defaultLat = 35.681236;
 const defaultZoom = 4.9;
 // 検索時のzoom値
 const searchZoom = 14.5;
+
 // mapboxAPIkey取得
 mapboxgl.accessToken = mapboxKey;
+
 // map生成
 if (typeof searchResultLng !== 'undefined') {
       var map = new mapboxgl.Map({
@@ -82,12 +85,13 @@ if (map) {
       });
       map.addControl(language);
 }
+
+// マーカーオブジェクトを格納する変数を用意
+let markerObjs = new Array();
+let index = 0;
+
 // mapをloadした後に実行
 map.on('load', function() {
-      // map.setLayoutProperty('country-label', 'text-field', [
-      //       'get',
-      //       `name_jp`
-      // ]);
 
       // ループ処理入れる
       superbViewMasters.forEach(function(superbViewMaster){
@@ -98,48 +102,69 @@ map.on('load', function() {
             // ピンの生成
             eval("var marker" + superbViewMaster.id + " = new mapboxgl.Marker({}).setLngLat([" + superbViewMaster.lng + "," + superbViewMaster.lat + "]).setPopup(popup" + superbViewMaster.id + ").addTo(map);" );
 
+            // ピンをオブジェクトに保存
+            markerObjs[index] = eval("marker" + superbViewMaster.id );
+            index = index + 1;
+
       });
 
-      // // ピンのポップアップ作成
-      // const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      // 'スカイツリーです'
-      // );
-      // // ピンの生成
-      // const marker = new mapboxgl.Marker({
-      // })
-      // // 経度緯度を取得
-      // .setLngLat([139.810810, 35.710006]) //経度,緯度
-      // // ポップアップ表示
-      // .setPopup(popup) // sets a popup on this marker
-      // // map上に追加
-      // .addTo(map);
-      // // map.resize();
 })
 $(function() {
       // ボタンがクリックされた場合
       $('a.prefecture').on('click', function(){
-        console.log($(this).data('pref-code'));
-        const pref = prefData[$(this).data('pref-code')];
-        map.flyTo({
-            // These options control the ending camera position: centered at
-            // the target, at zoom level 9, and north up.
-            center: [pref.lng, pref.lat],
-            zoom: pref.zoom,
-            bearing: 0,
-             
-            // These options control the flight curve, making it move
-            // slowly and zoom out almost completely before starting
-            // to pan.
-            speed: 1.2, // make the flying slow
-            curve: 1, // change the speed at which it zooms out
-             
-            // This can be any easing function: it takes a number between
-            // 0 and 1 and returns another number between 0 and 1.
-            easing: (t) => t,
-             
-            // this animation is considered essential with respect to prefers-reduced-motion
-            essential: true
+            const pref = prefData[$(this).data('pref-code')];
+            // 各都道府県に画面を移動
+            map.flyTo({
+                  // These options control the ending camera position: centered at
+                  // the target, at zoom level 9, and north up.
+                  center: [pref.lng, pref.lat],
+                  zoom: pref.zoom,
+                  bearing: 0,
+                  
+                  // These options control the flight curve, making it move
+                  // slowly and zoom out almost completely before starting
+                  // to pan.
+                  speed: 1.2, // make the flying slow
+                  curve: 1, // change the speed at which it zooms out
+                  
+                  // This can be any easing function: it takes a number between
+                  // 0 and 1 and returns another number between 0 and 1.
+                  easing: (t) => t,
+                  
+                  // this animation is considered essential with respect to prefers-reduced-motion
+                  essential: true
+                  });
+            
+            // 元々表示されていたマーカーオブジェクトの数分ループして削除する
+            markerObjs.forEach(function(marker) {
+                  marker.remove();
             });
+
+            // 非同期で各都道府県のピンを表示
+            $.ajax( {
+                  type: "get", //形式
+                  url: `/api/v1/superb_views`, //リクエストURL
+                  dataType: 'json',
+                  data: { "pref_code": $(this).data('pref-code') }
+            })
+            .done((res) => { // resの部分にコントローラーから返ってきた値 $results が入る
+                  $.each(res, function (index, value) {
+
+                        // ピンのポップアップ作成
+                        eval("var popup" + value.id + " = new mapboxgl.Popup({ offset: 25 }).setHTML(" + "`<h3>" + value.name + "</h3><br><p>所在地：" + value.address + "</p><br><a href=" + "\"superb_views/" + value.id + "\"" + ">口コミを見る" + "</a>`" + ");");
+
+                        // ピンの生成
+                        eval("var marker" + value.id + " = new mapboxgl.Marker({}).setLngLat([" + value.lng + "," + value.lat + "]).setPopup(popup" + value.id + ").addTo(map);" );
+
+                        // ピンをオブジェクトに保存
+                        markerObjs[index] = eval("marker" + value.id );
+                        index = index + 1;
+                  });
+            })
+            .fail((error) => {
+                  console.log(error);
+            });
+
       });
 });
 
