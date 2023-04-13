@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'ログイン')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -51,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
+                        <div class="row mb-4">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
@@ -64,6 +66,13 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <a href="{{ route('login.line.redirect') }}" class="line_login"><img src="{{ asset('images/btn_login_base.png') }}" alt="Line Login"></a>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

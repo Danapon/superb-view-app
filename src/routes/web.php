@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperbViewController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,11 @@ use App\Http\Controllers\SuperbViewController;
 Route::get('/', [SuperbViewController::class, 'index']);
 
 Auth::routes();
+
+Route::prefix('login')->name('login.')->group(function() {
+  Route::get('/line/redirect', [LoginController::class, 'redirectToProvider'])->name('line.redirect');
+  Route::get('/line/callback', [LoginController::class, 'handleProviderCallback'])->name('line.callback');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
